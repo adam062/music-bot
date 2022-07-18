@@ -68,6 +68,17 @@ module.exports = async function () {
       })
     }
   });
+  client.distube.on("addSong", async (queue, song) => {
+    try {
+      let data = await temporary_db.get(`${song.user.id}_${queue.textChannel.id}_${queue.voiceChannel.id}`)
+      let message = await queue.textChannel.messages.cache.get(data.message_id)
+      await message.edit({ content: `🎵 تم اضافته الي قائمة الانتظار :\`${song.name}\` - \`${song.formattedDuration}\`` })
+    } catch (e) {
+      await queue.textChannel.send({ content: `🎵 تم اضافته الي قائمة الانتظار :\`${song.name}\` - \`${song.formattedDuration}\`\nبواسطة: ${song.user}` }).then(async (m) => {
+        await temporary_db.set(`${song.user.id}_${queue.textChannel.id}_${queue.voiceChannel.id}`, { message_id: m.id })
+      })
+    }
+  });
   client.distube.on('error', (channel, e) => {
     if (channel) channel.send(`تمت مصادفة خطأ: ${e}`)
     else console.error(e)
