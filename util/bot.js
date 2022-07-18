@@ -118,9 +118,6 @@ module.exports = async function () {
             await interaction.editReply({ embeds: [{ color: 0xf0f0f0, title: `تم ترتيب الاغاني عشوائيًا في قائمة الانتظار` }] });
           }
           if (interaction.commandName == "playlist") {
-            /*if (queue.songs.length == 1) {
-              return await interaction.editReply({ embeds: [{ color: 0xf0f0f0, title: `قائمة الانتظار (${queue.songs.length} عدد الاغاني)`, description: `_تعمل الان :_ **[${queue.song[0].name}](${queue.song[0].url})** - \`${queue.song[0].formattedDuration}\`` }] })
-            }*/
             let q = queue.songs.slice(0, 10)
               .map((song, i) => `${i === 0 ? '_تعمل الان :_' : `\`${i}\` -`} **[${song.name}](${song.url})** - \`${song.formattedDuration}\``)
               .join('\n')
