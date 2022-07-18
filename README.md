@@ -2,7 +2,7 @@
 - `Distube v4.0.0` , `Discord.js v14.0.1` , `ST.db v4.0.7`,
 
 ## If you want to see the Replit version
-- [Click here](https://replit.com/@Shuruhatik/suggestion-bot-by-shuruhatik?v=1#README.md)
+- [Click here](https://replit.com/@Shuruhatik/music-bot-by-shuruhatik?v=1#README.md)
 
 ## Contact
 **Any bug or suggestion !**
