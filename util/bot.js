@@ -1,5 +1,4 @@
 const Database = require("st.db");
-//import express from 'express';
 const { createSpinner } = require("nanospinner");
 const { Client, PermissionsBitField, Partials, GatewayIntentBits } = require('discord.js');
 const { DisTube } = require('distube');
