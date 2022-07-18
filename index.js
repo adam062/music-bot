@@ -2,9 +2,6 @@ const inquirer = require("inquirer");
 const chalkAnimation = require("chalk-animation");
 const startBot = require("./util/bot.js")
 const Database = require("st.db");
-//import replit from "quick.replit"
-//const config_replit_db = new replit.Database(process.env["REPLIT_DB_URL"])
-const config_replit_db = new Database({ path: "./token.json", databaseInObject: true })
 const config = new Database({ path: "./config.json", databaseInObject: true })
 getStarted()
 function clearTextPrompt(str, status_bot = false) {
@@ -13,9 +10,9 @@ function clearTextPrompt(str, status_bot = false) {
 
 async function getStarted() {
     if (await config.get("do_false_this_value_if_you_want_delete_token") != true) {
-        await config_replit_db.delete(`token`)
+        await config.delete(`token`)
     }
-    if (await config_replit_db.has(`token`) == true) return await startBot()
+    if (await config.has(`token`) == true) return await startBot()
     const rainbow = chalkAnimation.neon('ًﺍﺮﻴﺜﻛ ﺭﺎﻔﻐﺘﺳﻻﺍﻭ ﻪﻠﻟﺍ ﺮﻛﺫ ﻰﺴﻨﺗ ﻻ ﺀﻲﺷ ﻞﻛ ﻞﺒﻗ');
     setTimeout(async () => {
         rainbow.stop()
@@ -39,7 +36,7 @@ async function getStarted() {
                 { name: "PLAYING", value: 0 }, { name: "LISTENING", value: 2 }, { name: "WATCHING", value: 3 }, { name: "COMPETING", value: 5 }
             ]
         })
-        await config_replit_db.set(`token`, clearTextPrompt(ask1.token_bot))
+        await config.set(`token`, clearTextPrompt(ask1.token_bot))
         await config.set("status_type", ask3.status_type)
         await config.set("status_bot", clearTextPrompt(ask2.status_bot, true))
         await config.set("do_false_this_value_if_you_want_delete_token", true)
