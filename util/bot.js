@@ -87,6 +87,9 @@ module.exports = async function () {
     await queue.textChannel.send({ content: "لا يوجد المزيد من الأغاني في قائمة الانتظار" })
     await checkVoice(queue, client)
   });
+  client.distube.on("addList", async(queue, playlist) => {
+    await queue.textChannel.send({ content: `تم اضافة \`${playlist.name}\` قائمة تشغيل (${playlist.songs.length} عدد الاغاني) الي قائمة الانتظار!` })
+  });
   client.distube.on("empty", async queue => await checkVoice(queue, client));
   client.distube.on("noRelated", async queue => await checkVoice(queue, client));
   client.distube.on("disconnect", async queue => await checkVoice(queue, client));
