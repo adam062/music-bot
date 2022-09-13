@@ -41,10 +41,8 @@ module.exports = async function () {
   client.on("ready", async () => {
     await synchronizeSlashCommands(client)
     client.user.setActivity({ name: config.get("status_bot"), type: config.get("status_type") });
-    let bot_invite_link = `https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot%20applications.commands`
     spinner.success({ text: `Logged in as ${client.user.tag} (${client.user.id})`, color: 'bgGreen' })
     console.log("\u001b[32m▣ \u001b[38;5;45;1mMusic\u001b[0m Bot By \u001b[38;5;44;1mShuruhatik#2443\u001b[0m ")
-    console.log("\u001b[32m▣ \u001b[0m\u001b[0m\u001b[40;1m\u001b[34;1mhttps://" + process.env.REPL_ID + ".id.repl.co/invite\u001b[0m")
     setInterval(async () => {
       if (await temporary_db.has(`stay`)) {
         let data = await temporary_db.get(`stay`)
