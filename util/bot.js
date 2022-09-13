@@ -56,6 +56,7 @@ module.exports = async function () {
       }
     }, 900000)
   })
+  
   client.on("error", console.log)
   client.distube.on("playSong", async (queue, song) => {
     try {
@@ -83,12 +84,12 @@ module.exports = async function () {
     if (channel) channel.send(`تمت مصادفة خطأ: ${e}`)
     else console.error(e)
   });
+  client.distube.on("addList", async(queue, playlist) => {
+    await queue.textChannel.send({ content: `تم اضافة \`${playlist.name}\` قائمة تشغيل (${playlist.songs.length} عدد الاغاني) الي قائمة الانتظار!` })
+  });
   client.distube.on("finish", async queue => {
     await queue.textChannel.send({ content: "لا يوجد المزيد من الأغاني في قائمة الانتظار" })
     await checkVoice(queue, client)
-  });
-  client.distube.on("addList", async(queue, playlist) => {
-    await queue.textChannel.send({ content: `تم اضافة \`${playlist.name}\` قائمة تشغيل (${playlist.songs.length} عدد الاغاني) الي قائمة الانتظار!` })
   });
   client.distube.on("empty", async queue => await checkVoice(queue, client));
   client.distube.on("noRelated", async queue => await checkVoice(queue, client));
@@ -98,7 +99,7 @@ module.exports = async function () {
       if (!interaction.guild) return;
       if (interaction.commandName == "help") {
         let embeds = [{
-          author: { name: "Help Panel", url: `https://www.youtube.com/shuruhatikyt/` },
+          author: { name: "قائمة المساعدة", url: `https://www.youtube.com/shuruhatikyt/` },
           description: `يدعم بوت الموسيقى أكثر من 1400 موقع يمكنك تشغيل من خلاله الاغاني تم برمجة وصناعة البوت بكامل وجميع الحقوق لدي [شروحاتك](https://www.youtube.com/shuruhatikyt/)`,
           fields: [{
             name: `أوامر البوت`,
